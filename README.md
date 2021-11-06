@@ -1,16 +1,11 @@
 # Video Clipper
 
-## Setup:
 
-Conda is used to manage versions, dependencies, and to keep things isolated.
+## Requirements
 
-Start by installing conda, watch a video about it.
+### ffmpeg Python
+pip install ffmpeg-python
 
-### Setup Env:
+### ffmpeg
 
-```conda env create -f conda_env.yml```
-
-
-### Update Env When Dependencies Change:
-```conda env update -f conda_env.yml```
-
+brew install ffmpeg
