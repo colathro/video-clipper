@@ -2,6 +2,7 @@ import argparse
 import uuid
 import os
 import ffmpeg
+import shutil
 
 
 def parse_args():
@@ -12,6 +13,10 @@ def parse_args():
     parser.add_argument('--game', dest="game", type=str,
                         help='game flag i.e. csgo')
     return parser.parse_args()
+
+
+def map_game_to_parser(game):
+    return
 
 
 class ClipperSession:
@@ -33,29 +38,29 @@ class ClipperSession:
 
     def generate_screenshots(self):
         (ffmpeg.input(self.filename)
-            .filter('fps', fps=.5)
-            .output(f'{self.tmp}/{self.id}/%t.png',
-                    video_bitrate='5000k',
+            .filter('fps', fps=4)
+            .output(f'{self.tmp}/{self.id}/%d.jpg',
+                    video_bitrate='2500k',
                     sws_flags='bilinear',
                     start_number=0)
             .run())
 
     def ensure_output_dir(self):
-        if os.path.exists(self.output):
-            return
-        os.mkdir(self.output)
+        if not os.path.exists(self.output):
+            os.mkdir(self.output)
+        os.mkdir(os.path.join(self.output, self.id))
 
     def ensure_tmp_dir(self):
-        if os.path.exists(self.tmp):
-            return
-        os.mkdir(self.tmp)
+        if not os.path.exists(self.tmp):
+            os.mkdir(self.tmp)
+        os.mkdir(os.path.join(self.tmp, self.id))
 
     def clean_up_tmp_dir(self):
         if os.path.exists(self.tmp):
-            os.rmdir(self.tmp)
+            shutil.rmtree(self.tmp)
 
 
 if __name__ == "__main__":
     args = parse_args()
-    session = ClipperSession(args.file, args.name)
+    session = ClipperSession(args.file, args.game)
     session.run()
