@@ -11,7 +11,7 @@
             "program": "video_clipper.py",
             "console": "integratedTerminal",
             "cwd": "${workspaceFolder}",
-            "args": ["--file", "test.mp4", "--game","csgo"]
+            "args": ["--file", "test2.mp4", "--game","csgo"]
         }
     ]
 }
