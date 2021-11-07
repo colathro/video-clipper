@@ -132,5 +132,5 @@ ffmpeg
 
 test.mp4
 
-output/**.*
-tmp/**.*
+output/
+tmp/

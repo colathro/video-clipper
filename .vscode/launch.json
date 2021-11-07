@@ -8,9 +8,10 @@
             "name": "Python: Current File",
             "type": "python",
             "request": "launch",
-            "program": "${file}",
+            "program": "video_clipper.py",
             "console": "integratedTerminal",
-            "cwd": "${fileDirname}"
+            "cwd": "${workspaceFolder}",
+            "args": ["--file", "test.mp4", "--game","csgo"]
         }
     ]
 }
