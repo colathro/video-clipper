@@ -28,4 +28,10 @@ class CSGOImageDataset(Dataset):
             label.append(float(char))
 
         image = image.float()
+        label = torch.tensor(label)
+
+        label = label + -1
+        label = label * 2
+        label = label + 1
+
         return image, torch.tensor(label)

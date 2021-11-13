@@ -19,10 +19,8 @@ class NeuralNetwork(nn.Module):
         self.flatten = nn.Flatten()
         # 360 * 6400
         self.linear_relu_stack = nn.Sequential(
-            nn.Linear(6912000, 512),
-            nn.ReLU(),
-            nn.Linear(512, 512),
-            nn.ReLU(),
+            nn.Linear(216000, 1024),
+            nn.Linear(1024, 512),
             nn.Linear(512, 10),
         )
 
@@ -43,8 +41,6 @@ def train_loop(dataloader, model, loss_fn, optimizer):
     for batch, (X, y) in enumerate(dataloader):
         # Compute prediction and loss
         pred = model(X)
-        print(pred)
-        print(y)
         loss = loss_fn(pred, y)
 
         # Backpropagation
@@ -66,7 +62,6 @@ def test_loop(dataloader, model, loss_fn):
         for X, y in dataloader:
             pred = model(X)
             test_loss += loss_fn(pred, y).item()
-            correct += (pred.argmax(1) == y).type(torch.float).sum().item()
 
     test_loss /= num_batches
     correct /= size
@@ -74,7 +69,7 @@ def test_loop(dataloader, model, loss_fn):
         f"Test Error: \n Accuracy: {(100*correct):>0.1f}%, Avg loss: {test_loss:>8f} \n")
 
 
-loss_fn = nn.L1Loss()
+loss_fn = nn.CrossEntropyLoss()
 optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
 
 epochs = 10

@@ -47,23 +47,5 @@ class CSGO:
         image = cv2.imread(filename, flags=cv2.IMREAD_COLOR)
         image = image[:((np.shape(image)[0]//2)//2),
                       ((np.shape(image)[1]//2)+(np.shape(image)[1]//4)):]
-
-        rMin = 74
-        bMin = 34
-        gMin = 34
-        rMax = 255
-        bMax = 48
-        gMax = 48
-
-        # Set minimum and max HSV values to display
-        lower = np.array([rMin, gMin, bMin])
-        upper = np.array([rMax, gMax, bMax])
-
-        # Create HSV Image and threshold into a range.
-        rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-        mask = cv2.inRange(rgb, lower, upper)
-        output = cv2.bitwise_and(image, image, mask=mask)
-
-        output = cv2.cvtColor(output, cv2.COLOR_BGR2RGB)
         cv2.imwrite(f"{filename}", image)
         return output

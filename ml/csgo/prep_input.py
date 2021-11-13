@@ -69,6 +69,15 @@ class Processor:
             for img_file in images:
                 img = cv2.imread(os.path.join(self.tmp_id_dir, img_file))
                 output = np.concatenate((output, img), axis=1)
+
+            # calculate the 50 percent of original dimensions
+            width = int(output.shape[1] * 25 / 100)
+            height = int(output.shape[0] * 25 / 100)
+
+            # dsize
+            dsize = (width, height)
+
+            output = cv2.resize(output, dsize)
             out_file_name = f'{self.file_id}_{i}_{i+10}_{self.base_label}.jpg'
             cv2.imwrite(os.path.join(self.out_id_dir, out_file_name), output)
 

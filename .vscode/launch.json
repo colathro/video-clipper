@@ -8,9 +8,9 @@
             "name": "Python: Current File",
             "type": "python",
             "request": "launch",
-            "program": "video_clipper.py",
+            "program": "train.py",
             "console": "integratedTerminal",
-            "cwd": "${workspaceFolder}",
+            "cwd": "${workspaceFolder}/ml/csgo",
             "args": ["--file", "test2.mp4", "--game","csgo"]
         }
     ]

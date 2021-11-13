@@ -132,6 +132,7 @@ ffmpeg
 
 test.mp4
 
-output/
+out/
 tmp/
 raw_Data/
+labeled/
